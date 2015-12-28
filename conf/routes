@@ -3,17 +3,24 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index(n: String)
+GET     /                           controllers.Application.index
+
+# Product List
+GET     /products                   controllers.Products.list
+
+POST    /products                   controllers.Products.save
+GET     /products/new               controllers.Products.newProduct
+
+GET     /products/:ean              controllers.Products.show(ean: Long)
+GET     /barcode/:ean               controllers.Barcode.barcode(ean: Long)
 
 
-GET     /hello                      controllers.Application.hello(n: String)
-
-
-# Tasks
-GET     /tasks                      controllers.Application.tasks(n: String)
-POST    /tasks                      controllers.Application.newTask
-POST    /tasks/:id/delete           controllers.Application.deleteTask(id: Long)
+# Comments
+GET     /react                      controllers.Application.react
+GET     /comments                   controllers.Application.comment(author, text)
+POST    /comment                    controllers.Application.comment(author, text)
 
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+GET     /webjars/*file              controllers.WebJarAssets.at(file)
