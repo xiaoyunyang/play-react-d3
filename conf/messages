@@ -7,8 +7,10 @@ description = Description
 products.details = Product: {0}
 products.form = Product details
 products.new = (new)
-products.new.command = New
 products.new.submit = Add
+
+products.new.command = New
+products.list.navigation = Products
 products.new.success = Successfully added product {0}.
 
 validation.errors = Please correct the errors in the form.

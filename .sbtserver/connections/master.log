@@ -1,0 +1,7 @@
+New log file opened at Sat Jan 02 15:30:25 EST 2016 by 57661@Xiaoyuns-MacBook-Pro.local
+Taking next connection to: 61961
+New client attempting to connect on port: 61962-61961
+  Address = /192.168.1.179:61961
+This client on port 61962 has uuid 0811cfee-955f-4afd-a353-fe858ac94f21 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: play-fork-run-0811cfee-955f-4afd-a353-fe858ac94f21
+Taking next connection to: 61961

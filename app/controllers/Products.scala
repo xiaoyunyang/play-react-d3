@@ -45,6 +45,7 @@ class Products extends Controller {
     else
       productForm
     */
+
     val form = productForm
     Ok(views.html.products.editProduct(form))
   }
@@ -56,7 +57,7 @@ class Products extends Controller {
       hasErrors = { form =>
         Redirect(routes.Products.newProduct())
           .flashing(Flash(form.data) +
-            ("error" -> Messages("validation errors")))
+            ("error" -> Messages("validation.errors")))
       },
       success = { newProduct =>
         Product.add(newProduct)

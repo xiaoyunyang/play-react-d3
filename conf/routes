@@ -14,6 +14,12 @@ GET     /products/new               controllers.Products.newProduct
 GET     /products/:ean              controllers.Products.show(ean: Long)
 GET     /barcode/:ean               controllers.Barcode.barcode(ean: Long)
 
+# Async Jobs
+GET     /async                      controllers.PickLists.index
+GET     /preview                    controllers.PickLists.preview(warehouse: String)
+POST    /sendasync                  controllers.PickLists.sendAsync(warehouse: String)
+GET     /backlog/:warehouse         controllers.Dashboard.backlog(warehouse: String)
+
 
 # Comments
 GET     /react                      controllers.Application.react
