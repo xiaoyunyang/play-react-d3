@@ -3,7 +3,7 @@
     <dl class="products">
     @for(product <- products) {
         <dt>
-            <a href="@controllers.routes.Products.show(product.ean)">
+            <a href="@controllers.routes.Products.details(product.ean)">
                 @product.name
             </a>
         </dt>

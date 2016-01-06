@@ -1,0 +1,19 @@
+@(user: User, binders: List[Binder])(implicit flash: Flash, messages: Messages)
+@main(Messages("application.name")) {
+    <h2>
+        @user.name
+    </h2>
+    <dl class="products">
+    @for(binder <- binders) {
+        <dt>
+            <a href="@controllers.routes.Binders.details(user.username, binder.name)">
+                @binder.alias
+            </a>
+        </dt>
+        <dd>@binder.description</dd>
+    }
+    </dl>
+
+    <p>
+    </p>
+}

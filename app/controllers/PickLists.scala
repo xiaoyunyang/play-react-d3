@@ -33,16 +33,13 @@ class PickLists extends Controller {
     }
     Redirect(routes.PickLists.index())
   }
-  def index = Action {
-    Ok(views.html.index())
-  }
+
   /*
  * Renders the home page
  */
-  /*
   def index = Action {
     Ok(views.html.index())
-  }*/
+  }
 
   /**
     * Stub for ‘sending’ the pick list as an HTML document, e.g. by e-mail.

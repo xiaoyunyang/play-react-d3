@@ -13,8 +13,8 @@ import models.Product
 
 class Barcode extends Controller {
   val ImageResolution = 144
-  def barcode(ean: Long) = Action {
 
+  def barcode(ean: Long) = Action {
     import java.lang.IllegalArgumentException
     val MimeType = "image/png"
     try {

@@ -22,8 +22,9 @@ import models._
 
 class Application extends Controller {
 
-  def index = Action {
-    Redirect(routes.Products.list())
+  def index = Action { implicit request =>
+    Ok(views.html.dashboard.list())
+    //Redirect(routes.Products.list())
   }
   def react = Action {
     Ok(views.html.react())

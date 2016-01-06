@@ -23,4 +23,8 @@ object Product {
   def add(product: Product): Unit = {
     products = products + product //persistent storage
   }
+  def delete(ean: Long): Unit = {
+    var newProducts = products.filter(a => a.ean!=ean)
+    products = newProducts
+  }
 }
