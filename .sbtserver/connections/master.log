@@ -1,0 +1,16 @@
+New log file opened at Tue Jan 05 23:18:21 EST 2016 by 94495@Xiaoyuns-MacBook-Pro.local
+Taking next connection to: 53792
+New client attempting to connect on port: 53793-53792
+  Address = /10.1.10.162:53792
+This client on port 53793 has uuid ef3f7616-5b5a-435a-8c86-23752e05b05b configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: play-fork-run-ef3f7616-5b5a-435a-8c86-23752e05b05b
+Taking next connection to: 53792
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 53792
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 53792
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 53792

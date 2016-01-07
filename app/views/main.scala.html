@@ -26,10 +26,22 @@
                                 @Messages("products.list.navigation")
                             </a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="@routes.Products.newProduct()">
                                 <i class="icon-plus icon-white"></i>
                                 @Messages("products.new.command")
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@routes.PickLists.index()">
+                                <i class="icon-plus icon-white"></i>
+                                @Messages("Async")
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@routes.Bookmarks.list()">
+                                <i class="icon-plus icon-white"></i>
+                                Bookmarks
                             </a>
                         </li>
                         <li class="divider-vertical"></li>

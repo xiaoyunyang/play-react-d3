@@ -1,15 +1,29 @@
-application.name = Product catalog
+application.name = Sample App
 
 ean = EAN
 name = Name
 description = Description
 
+
+bookmarks.details = Bookmark: {0}
+binders.details = Binder: {0}
+
 products.details = Product: {0}
 products.form = Product details
 products.new = (new)
-products.new.command = New
 products.new.submit = Add
+
+products.new.command = New
+products.list.navigation = Products
 products.new.success = Successfully added product {0}.
 
 validation.errors = Please correct the errors in the form.
 validation.ean.duplicate = A product with this EAN code already exists
+
+bookmarks.url = URL
+bookmarks.name = Name
+bookmarks.description = Description
+
+binders.url = URL
+binders.alias = Name
+binders.description = Description

@@ -1,0 +1,17 @@
+@(bookmarks: List[Bookmark])(implicit flash: Flash, messages: Messages)
+@main(Messages("application.name")) {
+    <h2>All Bookmarks</h2>
+    <dl class="products">
+    @for(bookmark <- bookmarks) {
+        <dt>
+            <a href="@controllers.routes.Bookmarks.details(bookmark.name)">
+                @bookmark.name
+            </a>
+        </dt>
+        <dd>@bookmark.description</dd>
+    }
+    </dl>
+
+    <p>
+    </p>
+}

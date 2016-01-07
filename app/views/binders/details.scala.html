@@ -1,0 +1,13 @@
+@(binder: Binder)(implicit flash: Flash, messages: Messages)
+
+@main(Messages("binders.details", binder.alias)) {
+    <h2>
+    @Messages("binders.details", binder.alias)
+    </h2>
+    <dl class="dl-horizontal">
+        <dt>@Messages("binders.alias"):</dt>
+        <dd><a target="_blank" href="@binder.name">@binder.alias</a></dd>
+        <dt>@Messages("binders.description"):</dt>
+        <dd>@binder.description</dd>
+    </dl>
+}
