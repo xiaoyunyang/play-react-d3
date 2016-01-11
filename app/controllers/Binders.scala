@@ -5,7 +5,6 @@ import play.api.mvc._
 
 import play.api.mvc.{Action, Controller}
 import scala.concurrent.{ExecutionContext, Future}
-import models.Order
 import models.Binder
 import models.User
 
@@ -22,14 +21,15 @@ class Binders extends Controller {
     }.getOrElse(NotFound)
   }
 
-  /***********************************************
-    * The details Action:
-    * retrieves details for a particular binder
-    ***********************************************/
   def details(username: String, name: String) = Action { implicit request =>
     Binder.findByName(name).map { binder =>
-      Ok(views.html.binders.details(binder))
+      Ok(views.html.binders.details(username, binder))
     }.getOrElse(NotFound)  //or return a 404 page
+  }
+
+  def delete(username: String, bindername: String) = Action {
+    Binder.delete(username, bindername)
+    Redirect(routes.Binders.list(username)) //reverse routing
   }
 
   /**
@@ -42,4 +42,5 @@ class Binders extends Controller {
     }
     backlog.map(value => Ok(value))
   }
+
 }

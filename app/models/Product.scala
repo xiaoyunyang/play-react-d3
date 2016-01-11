@@ -5,7 +5,7 @@ case class Product(ean: Long, name: String, description: String)
 
 //Data access object
 object Product {
-  var products = Set(
+  private var products = Set(
     Product(5010255079763L, "Paperclips Large",
       "Large Plain Pack of 1000"),
     Product(5018206244666L, "Giant Paperclips",
@@ -24,7 +24,7 @@ object Product {
     products = products + product //persistent storage
   }
   def delete(ean: Long): Unit = {
-    var newProducts = products.filter(a => a.ean!=ean)
+    val newProducts = products.filter(a => a.ean != ean)
     products = newProducts
   }
 }

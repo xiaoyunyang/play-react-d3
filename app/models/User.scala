@@ -5,7 +5,7 @@ case class User(username: String, name: String)
 
 //Data access object
 object User {
-  var users = Set(
+  private var users = Set(
     User("afenner", "Andrew Fenner"),
     User("xyang", "Xiaoyun Yang")
   )

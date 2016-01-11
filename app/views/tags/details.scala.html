@@ -1,0 +1,23 @@
+@(tagName: String, tag: List[Tag])(implicit flash: Flash, messages: Messages)
+
+@main(Messages("tags.tagname", tagName)) {
+    <h2>
+        @Messages("tags.tagname", tagName)
+    </h2>
+    <dl class="dl-horizontal">
+        @for(detail <- tag) {
+            <dt>@Messages("tags.username"):</dt>
+            <dd>
+                <a target="_blank" href="@controllers.routes.Binders.list(detail.username)">
+                    @detail.username
+                </a>
+            </dd>
+            <dt>@Messages("tags.url"):</dt>
+            <dd>
+                <a target="_blank" href="@detail.url">
+                @detail.url
+                </a>
+            </dd>
+        }
+    </dl>
+}
