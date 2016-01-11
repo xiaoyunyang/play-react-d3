@@ -15,11 +15,23 @@ GET     /products/new               controllers.Products.newProduct
 GET     /products/:ean              controllers.Products.details(ean: Long)
 GET     /barcode/:ean               controllers.Barcode.barcode(ean: Long)
 
+# Bookmarks
+GET     /bookmarks                  controllers.Bookmarks.list
+GET     /bookmarks/:name            controllers.Bookmarks.details(name: String)
+# Tags
+GET     /tags                       controllers.Tags.list
+GET     /tags/:name                 controllers.Tags.details(name: String)
+
+
 # Dashboard
-GET     /bookmarks                          controllers.Bookmarks.list
-GET     /bookmarks/:name                    controllers.Bookmarks.details(name: String)
-GET     /dashboard/:username                controllers.Binders.list(username: String)
-GET     /dashboard/:username/:binderName    controllers.Binders.details(username: String, binderName: String)
+GET     /dashboard                                         controllers.Application.dashboard
+GET     /dashboard/:username                               controllers.Binders.list(username: String)
+GET     /dashboard/:username/binders/:bindername           controllers.Binders.details(username: String, bindername: String)
+GET     /dashboard/:username/binders/:bindername/delete    controllers.Binders.delete(username: String, bindername: String)
+GET     /dashboard/:username/tags                          controllers.Tags.listByUser(username: String)
+
+GET     /dashboard/:username/bookmarks      controllers.Bookmarks.listByUser(username: String)
+
 
 
 # Async Jobs

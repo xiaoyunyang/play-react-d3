@@ -1,17 +1,71 @@
-@(bookmarks: List[Bookmark])(implicit flash: Flash, messages: Messages)
+@(bookmarks: List[(String, List[Bookmark])],
+        tagToLinks: List[(String, List[Tag])],
+        linkToTags: List[(String, List[Tag])]
+)(implicit flash: Flash, messages: Messages)
 @main(Messages("application.name")) {
-    <h2>All Bookmarks</h2>
+    <h2>Bookmarks</h2>
     <dl class="products">
     @for(bookmark <- bookmarks) {
         <dt>
-            <a href="@controllers.routes.Bookmarks.details(bookmark.name)">
-                @bookmark.name
+            <a href="@controllers.routes.Bookmarks.details(bookmark._1)">
+                @bookmark._1
             </a>
         </dt>
-        <dd>@bookmark.description</dd>
+        <dd>
+            <ol>
+                @for(detail <- bookmark._2) {
+                    <li>collected by <a href="@controllers.routes.Binders.list(detail.username)">@detail.username</a>:
+                        <ul>
+                            <li>name => @detail.name</li>
+                            <li>desc => @detail.desc</li>
+                        </ul>
+                    </li>
+                }
+            </ol>
+
+        </dd>
     }
     </dl>
 
-    <p>
-    </p>
+    <h2>linkToTags</h2>
+    <dl class="products">
+    @for(tag <- linkToTags) {
+        <dt>
+            <a href="@tag._1">
+                @tag._1
+            </a>
+        </dt>
+        <dd>
+            <ul>
+            @for(a <- tag._2) {
+                <li>
+                    <a href="@controllers.routes.Binders.list(a.username)">@a.username</a> =>
+                    <a target="_blank" href="@controllers.routes.Tags.details(a.name)">@a.name</a>
+                </li>
+            }
+            </ul>
+        </dd>
+    }
+    </dl>
+
+    <h2>tagToLinks</h2>
+    <dl class="products">
+    @for(tag <- tagToLinks) {
+        <dt>
+            <a href="@controllers.routes.Tags.details(tag._1)">
+                #@tag._1
+            </a>
+        </dt>
+        <dd>
+            <ul>
+            @for(a <- tag._2) {
+                <li>
+                    <a href="@controllers.routes.Binders.list(a.username)">@a.username</a> =>
+                    <a target="_blank" href="@a.url">@a.url</a>
+                </li>
+            }
+            </ul>
+        </dd>
+    }
+    </dl>
 }

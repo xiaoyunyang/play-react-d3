@@ -23,13 +23,16 @@ import models._
 class Application extends Controller {
 
   def index = Action { implicit request =>
-    Ok(views.html.dashboard.list())
     //Redirect(routes.Products.list())
+    Redirect(routes.Application.dashboard)
   }
   def react = Action {
     Ok(views.html.react())
   }
 
+  def dashboard = Action { implicit request =>
+    Ok(views.html.dashboard.list())
+  }
 
   // The json keys. The 'id' field was added as without it we would get a warning like this:
   // Warning: Each child in an array or iterator should have a unique "key" prop. Check the render method of CommentList. See https://fb.me/react-warning-keys for more information.

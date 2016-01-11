@@ -27,3 +27,7 @@ bookmarks.description = Description
 binders.url = URL
 binders.alias = Name
 binders.description = Description
+
+tags.username = Username:
+tags.tagname = TagName: {0}
+tags.url = URL

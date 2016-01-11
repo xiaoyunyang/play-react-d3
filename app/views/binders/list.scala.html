@@ -3,6 +3,7 @@
     <h2>
         @user.name
     </h2>
+    <h3>Binders:</h3>
     <dl class="products">
     @for(binder <- binders) {
         <dt>
@@ -14,6 +15,8 @@
     }
     </dl>
 
-    <p>
-    </p>
+    <h3>Tags:</h3>
+    <a href="@controllers.routes.Tags.listByUser(user.username)">All @user.name's Tags</a>
+    <h3>Bookmarks:</h3>
+    <a href="@controllers.routes.Bookmarks.listByUser(user.username)">All @user.name's Bookmarks</a>
 }

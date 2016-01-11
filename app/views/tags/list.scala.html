@@ -1,0 +1,28 @@
+@(tags: List[(String, List[Tag])])(implicit flash: Flash, messages: Messages)
+@main(Messages("application.name")) {
+    <h2>All Tags</h2>
+    <dl class="products">
+    @for(tag <- tags) {
+        <dt>
+            <a href="@controllers.routes.Tags.details(tag._1)">
+                #@tag._1
+            </a>
+        </dt>
+        <dd>
+        <ul>
+            @for(a <- tag._2) {
+                <li>
+                    <a href="@controllers.routes.Binders.list(a.username)">@a.username</a> =>
+                    <a target="_blank" href="@a.url">@a.url</a>
+                </li>
+            }
+        </ul>
+
+
+        </dd>
+    }
+    </dl>
+
+    <p>
+    </p>
+}
