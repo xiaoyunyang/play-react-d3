@@ -8,14 +8,15 @@ object Binder {
   private var binders = Set(
     Binder("elementary-math", "Elementary Math", "Elementary math teaching notes", "afenner",List("learning","math","kids")),
     Binder("swift-dev", "Swift Dev", "Useful stackoverflow posts for mobile app dev in Swift","afenner",List("tutorial","programming","swift")),
-    Binder("story-time", "Story Time", "My favorite post from Jesse's Story Time","afenner",List("funny","t2","t3")),
+    Binder("story-time", "Story Time", "My favorite post from Jesse's Story Time","afenner",List("funny")),
     Binder("scala-notes", "Scala Notes", "my evernote collection of scala learning notes", "xyang",List("tutorial","scala","learning")),
-    Binder("play-notes", "Learn Play Framework", "Best tutorial articles/Github projects for getting started with Play","xyang",List("tutorial","webapp","scala"))
+    Binder("play-notes", "Learn Play Framework", "Best tutorial articles/Github projects for getting started with Play","xyang",List("tutorial","webapp","scala")),
+    Binder("python-learning", "Python-Learning Notes", "beginner prgrogramming in Python","kbusch",List("learning","python","programming"))
   )
 
   def findAll(username: String) = binders.filter(_.username == username).toList.sortBy(_.name)
+
   def findByName(name: String) = binders.find(_.name == name)
-  //def findByUsername(username: String) = binders.find(_.username == username)
 
   //add a new bookmark to the bookmarks set
   def add(binder: Binder): Unit = {
