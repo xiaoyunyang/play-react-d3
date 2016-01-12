@@ -1,13 +1,10 @@
-New log file opened at Mon Jan 11 16:09:10 EST 2016 by 44539@Xiaoyuns-MacBook-Pro.local
-Taking next connection to: 56187
-New client attempting to connect on port: 56188-56187
-  Address = /10.1.10.162:56187
-This client on port 56188 has uuid ed6b2a0e-204f-467c-93ea-b280ec43ece1 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: play-fork-run-ed6b2a0e-204f-467c-93ea-b280ec43ece1
-Taking next connection to: 56187
+New log file opened at Tue Jan 12 11:36:22 EST 2016 by 54732@Xiaoyuns-MacBook-Pro.local
+Taking next connection to: 54115
+New client attempting to connect on port: 54116-54115
+  Address = /10.1.10.162:54115
+This client on port 54116 has uuid dec32fc5-4642-4351-b528-0f569d5b2bb1 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: play-fork-run-dec32fc5-4642-4351-b528-0f569d5b2bb1
+Taking next connection to: 54115
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 56187
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 56187
+Taking next connection to: 54115

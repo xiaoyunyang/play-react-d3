@@ -1,4 +1,4 @@
-@(user: User, binders: List[Binder])(implicit flash: Flash, messages: Messages)
+@(user: User, binders: List[Binder], myTags: List[(String,Int)], pThruT: List[(String,String)])(implicit flash: Flash, messages: Messages)
 @main(Messages("application.name")) {
     <h2>
         @user.name
@@ -16,7 +16,22 @@
     </dl>
 
     <h3>Tags:</h3>
+    <ul>
+        @for(t <- myTags) {
+            <li>
+                <a href="@controllers.routes.Tags.details(t._1)">#@t._1</a> (@t._2)
+            </li>
+        }
+    </ul>
     <a href="@controllers.routes.Tags.listByUser(user.username)">All @user.name's Tags</a>
     <h3>Bookmarks:</h3>
     <a href="@controllers.routes.Bookmarks.listByUser(user.username)">All @user.name's Bookmarks</a>
+    <h3>Recommended Friend Based on Shared Tags:</h3>
+    <ul>
+        @for(f <- pThruT) {
+            <li><a href="@controllers.routes.Binders.list(f._1)">@f._1</a> because
+                <a href="@controllers.routes.Tags.details(f._2)">#@f._2</a>
+            </li>
+        }
+    </ul>
 }

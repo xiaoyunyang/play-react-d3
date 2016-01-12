@@ -5,8 +5,9 @@ import play.api.mvc._
 
 import play.api.mvc.{Action, Controller}
 import scala.concurrent.{ExecutionContext, Future}
-import models.Binder
-import models.User
+import models.{Tag, Binder, User}
+
+import helper._
 
 //required for implicit to work
 import play.api.Play.current
@@ -16,8 +17,31 @@ class Binders extends Controller {
 
   def list(username: String) = Action { implicit request =>
     val binders = Binder.findAll(username)
+
+    /* recommend Friends */
+    val allTags = Tag.findAll //all tags associated with bookmarks
+
+    val tags = Tag.findByUsername(username) //tags associated with user's bookmarks
+
+    val binderTags = binders.flatMap(_.tags) //tags with only bookmarks
+
+    val thruT = (tags.map(_.name) ::: binderTags)
+      .flatMap(a => allTags.filter(_.name == a)).distinct
+
+    val thruTnotP = thruT.filter(a => a.username != username)
+
+    val pThruT = thruTnotP.foldRight(List[(String,String)]())((a,b) =>
+      (a.username, a.name) :: b).distinct
+
+    val bTags = binderTags.map(Tag(_, username, ""))
+
+    //current implementation counts the fact that a tag are associated with a binder as +1
+    //for the user
+    val myTags = mapList(bTags ::: tags)(_.name).toList
+      .foldRight(List[(String, Int)]())((a,b) => (a._1, a._2.size) :: b)
+
     User.findByUsername(username).map { user =>
-      Ok(views.html.binders.list(user,binders))
+      Ok(views.html.binders.list(user,binders, myTags, pThruT))
     }.getOrElse(NotFound)
   }
 
