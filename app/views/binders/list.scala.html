@@ -15,15 +15,16 @@
     }
     </dl>
 
-    <h3>Tags:</h3>
+    <h3>All @user.name's Tags:</h3>
     <ul>
         @for(t <- myTags) {
             <li>
-                <a href="@controllers.routes.Tags.details(t._1)">#@t._1</a> (@t._2)
+                <a href="@controllers.routes.Tags.detailsUser(user.username, t._1)">#@t._1</a> (@t._2)
             </li>
         }
     </ul>
     <a href="@controllers.routes.Tags.listByUser(user.username)">All @user.name's Tags</a>
+
     <h3>Bookmarks:</h3>
     <a href="@controllers.routes.Bookmarks.listByUser(user.username)">All @user.name's Bookmarks</a>
     <h3>Recommended Friend Based on Shared Tags:</h3>

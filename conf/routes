@@ -29,6 +29,7 @@ GET     /dashboard/:username                               controllers.Binders.l
 GET     /dashboard/:username/binders/:bindername           controllers.Binders.details(username: String, bindername: String)
 GET     /dashboard/:username/binders/:bindername/delete    controllers.Binders.delete(username: String, bindername: String)
 GET     /dashboard/:username/tags                          controllers.Tags.listByUser(username: String)
+GET     /dashboard/:username/tags/:tagName                 controllers.Tags.detailsUser(username: String, tagName: String)
 
 GET     /dashboard/:username/bookmarks      controllers.Bookmarks.listByUser(username: String)
 

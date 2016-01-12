@@ -23,7 +23,7 @@ class Binders extends Controller {
 
     val tags = Tag.findByUsername(username) //tags associated with user's bookmarks
 
-    val binderTags = binders.flatMap(_.tags) //tags with only bookmarks
+    val binderTags = binders.flatMap(_.tags) //tags associated with binders
 
     val thruT = (tags.map(_.name) ::: binderTags)
       .flatMap(a => allTags.filter(_.name == a)).distinct

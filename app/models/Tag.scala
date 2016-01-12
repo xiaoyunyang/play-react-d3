@@ -17,8 +17,10 @@ object Tag {
   def findByName(name: String) = tags.filter(_.name == name).toList
   def findByUsername(username: String) = tags.filter(_.username == username).toList.sortBy(_.name)
 
-  //add a new bookmark to the bookmarks set
+  def findByNameAndUsername(username: String, name: String) =
+    tags.filter(a => a.username==username && a.name==name).toList.sortBy(_.name)
 
+  //add a new bookmark to the bookmarks set
   def add(tag: Tag): Unit = {
     tags = tags + tag //persistent storage
   }
