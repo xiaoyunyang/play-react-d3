@@ -7,7 +7,7 @@ import play.api.mvc._
 import play.api.mvc.{Action, Controller}
 import scala.concurrent.{ExecutionContext, Future}
 import models.{Binder, Tag, Bookmark}
-import helper._
+import TagHelper._
 //required for implicit to work
 import play.api.Play.current
 import play.api.i18n.Messages.Implicits._

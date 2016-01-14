@@ -29,6 +29,12 @@ class Application extends Controller {
   def react = Action {
     Ok(views.html.react())
   }
+  def productSPA = Action {
+    Ok(views.html.productSPA())
+  }
+  def bookmarkSPA = Action {
+    Ok(views.html.bookmarks.listSPA())
+  }
 
   def dashboard = Action { implicit request =>
     Ok(views.html.dashboard.list())

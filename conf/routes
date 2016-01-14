@@ -5,12 +5,16 @@
 # Home page
 GET     /                           controllers.Application.index
 
-
-
 # Product List
 GET     /products                   controllers.Products.list
 POST    /products                   controllers.Products.save
 GET     /products/new               controllers.Products.newProduct
+
+# Products SPA
+GET     /products/spa               controllers.Application.productSPA
+GET     /products/spa/data          controllers.Products.listJson
+GET     /products/spa/details/:ean  controllers.Products.detailsJson(ean: Long)
+
 
 GET     /products/:ean              controllers.Products.details(ean: Long)
 GET     /barcode/:ean               controllers.Barcode.barcode(ean: Long)
@@ -18,6 +22,14 @@ GET     /barcode/:ean               controllers.Barcode.barcode(ean: Long)
 # Bookmarks
 GET     /bookmarks                  controllers.Bookmarks.list
 GET     /bookmarks/:name            controllers.Bookmarks.details(name: String)
+
+
+# Bookmarks SPA sends JSON over to the client; JavaScript rendering
+
+GET     /spa                            controllers.Application.bookmarkSPA
+GET     /spa/bookmarks                  controllers.Bookmarks.listJson
+GET     /spa/bookmarks/details/:key     controllers.Bookmarks.detailsJson(key: String)
+
 # Tags
 GET     /tags                       controllers.Tags.list
 GET     /tags/:name                 controllers.Tags.details(name: String)

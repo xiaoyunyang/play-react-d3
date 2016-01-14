@@ -7,7 +7,7 @@ import play.api.mvc.{Action, Controller}
 import scala.concurrent.{ExecutionContext, Future}
 import models.{Tag, Binder, User}
 
-import helper._
+import TagHelper._
 
 //required for implicit to work
 import play.api.Play.current
