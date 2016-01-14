@@ -26,13 +26,18 @@ class Application extends Controller {
     //Redirect(routes.Products.list())
     Redirect(routes.Application.dashboard)
   }
+
+  def reactBookmarks = Action { implicit request =>
+    Ok(views.html.bookmarks.listReact())
+  }
+
   def react = Action {
     Ok(views.html.react())
   }
   def productSPA = Action {
     Ok(views.html.productSPA())
   }
-  def bookmarkSPA = Action {
+  def bookmarkSPA = Action { implicit request =>
     Ok(views.html.bookmarks.listSPA())
   }
 

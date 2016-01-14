@@ -68,6 +68,40 @@ class Bookmarks extends Controller {
     val data = Bookmark.findAll.map(_.key)
     Ok(Json.toJson(data))
   }
+  def listJsonReact = Action { implicit request =>
+    val bookmarksList = Bookmark.findAll
+
+    val bookmarks = mapList(bookmarksList)(_.url)
+    val tags = Tag.findAll
+    val tagToLinks = mapList(tags)(_.name).toList
+    val linkToTags = mapList(tags)(_.key).toList
+
+    val items = Json.toJson(bookmarksList)
+
+    val tagToItems =
+      tagToLinks.map { a =>
+        val keys = a._2.map(a => a.key)
+        Json.obj(
+          "tag" -> JsString(a._1),
+          "keys" -> keys //name is really the key
+        )
+      }
+    val itemToTags =
+      linkToTags.map { a =>
+        val tags = a._2.map(a => a.name)
+        Json.obj(
+          "key" -> JsString(a._1),
+          "tags" -> tags //name is really the key
+        )
+      }
+    val data = Json.obj(
+      "items" -> items,
+      "tagToItems" -> tagToItems,
+      "itemToTags" -> itemToTags
+    )
+    //val data = Bookmark.findAll
+    Ok(Json.toJson(data))
+  }
 
   def listByUser(username: String) = Action { implicit request =>
     val bookmarksList = Bookmark.findByUserName(username)
