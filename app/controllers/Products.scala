@@ -14,7 +14,10 @@ import play.api.data.Form
 import play.api.data.Forms.{mapping, longNumber, nonEmptyText}
 import play.api.i18n.Messages
 
+//models
 import models.Product
+//required for json
+import play.api.libs.json._
 
 class Products extends Controller {
   /*
@@ -29,12 +32,25 @@ class Products extends Controller {
     )(Product.apply)(Product.unapply)
   )
 
+  implicit object ProductWrites extends Writes[Product] {
+    def writes(p: Product) = Json.obj(
+      "ean" -> Json.toJson(p.ean),
+      "name" -> Json.toJson(p.name),
+      "description" -> Json.toJson(p.description)
+    )
+  }
+
   /***********************************************
    * The list Action: retrieves a list of all items
    ***********************************************/
   def list = Action { implicit request =>
     val products = Product.findAll
     Ok(views.html.products.list(products))
+  }
+
+  def listJson = Action {
+    val productCodes = Product.findAll.map(_.ean)
+    Ok(Json.toJson(productCodes))
   }
   /***********************************************
    * The details Action: retrieves details for a particular item
@@ -43,6 +59,15 @@ class Products extends Controller {
     Product.findByEan(ean).map { product =>  //render a product barcode page
       Ok(views.html.products.details(product))
     }.getOrElse(NotFound)  //or return a 404 page
+  }
+
+  // gets an Option[Product] from the model and returns a response with
+  // the product in JSON format, or a NotFound error response if there’s no
+  // such product.
+  def detailsJson(ean: Long) = Action {
+    Product.findByEan(ean).map { product =>
+      Ok(Json.toJson(product))
+    }.getOrElse(NotFound)
   }
 
   def delete(ean: Long) = Action {

@@ -27,4 +27,16 @@ object Product {
     val newProducts = products.filter(a => a.ean != ean)
     products = newProducts
   }
+  /*
+   * takes a product instance as a parameter and replaces the product
+   * that has the same unique EAN code.
+   */
+
+  def save(product: Product) = {
+    findByEan(product.ean).map( oldProduct =>
+      this.products = this.products - oldProduct + product
+    ).getOrElse(
+      throw new IllegalArgumentException("Product not found")
+    )
+  }
 }

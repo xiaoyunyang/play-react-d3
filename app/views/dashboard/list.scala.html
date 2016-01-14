@@ -1,9 +1,12 @@
 @()(implicit flash: Flash, messages: Messages)
 @main(Messages("application.name")) {
-    <h2>Use LooseLeaf app - login as:</h2>
+    <h2>Simple LooseLeaf app - login as:</h2>
     <a class="btn btn-info" href="@controllers.routes.Binders.list("afenner")">Andrew Fenner</a>
     <a class="btn btn-info" href="@controllers.routes.Binders.list("xyang")">Xiaoyun Yang</a>
     <a class="btn btn-info" href="@controllers.routes.Binders.list("kbusch")">Kyle Buschbacher</a>
+    <h2>SPA LooseLeaf app</h2>
+    <a class="btn btn-primary" href="@controllers.routes.Application.bookmarkSPA()">BookmarksSPA</a>
     <h2>Or use the sample Product project:</h2>
     <a class="btn btn-primary" href="@controllers.routes.Products.list()">Products</a>
+    <a class="btn btn-primary" href="@controllers.routes.Application.productSPA()">ProductsSPA</a>
 }
