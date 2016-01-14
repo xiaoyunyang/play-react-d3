@@ -15,9 +15,9 @@ GET     /products/spa               controllers.Application.productSPA
 GET     /products/spa/data          controllers.Products.listJson
 GET     /products/spa/details/:ean  controllers.Products.detailsJson(ean: Long)
 
-
 GET     /products/:ean              controllers.Products.details(ean: Long)
 GET     /barcode/:ean               controllers.Barcode.barcode(ean: Long)
+
 
 # Bookmarks
 GET     /bookmarks                  controllers.Bookmarks.list
@@ -25,10 +25,20 @@ GET     /bookmarks/:name            controllers.Bookmarks.details(name: String)
 
 
 # Bookmarks SPA sends JSON over to the client; JavaScript rendering
-
 GET     /spa                            controllers.Application.bookmarkSPA
 GET     /spa/bookmarks                  controllers.Bookmarks.listJson
 GET     /spa/bookmarks/details/:key     controllers.Bookmarks.detailsJson(key: String)
+
+
+# Test React comment app
+GET     /react/test                 controllers.Application.react
+GET     /comments                   controllers.Application.comments
+POST    /comment                    controllers.Application.comment(author, text)
+
+# Test React looseleaf bookmarks
+GET     /react                      controllers.Application.reactBookmarks
+GET     /react/bookmarks            controllers.Bookmarks.listJsonReact
+
 
 # Tags
 GET     /tags                       controllers.Tags.list
@@ -54,10 +64,7 @@ POST    /sendasync                  controllers.PickLists.sendAsync(warehouse: S
 GET     /backlog/:warehouse         controllers.Bookmarks.backlog(warehouse: String)
 
 
-# Comments
-GET     /react                      controllers.Application.react
-GET     /comments                   controllers.Application.comment(author, text)
-POST    /comment                    controllers.Application.comment(author, text)
+
 
 
 # Map static resources from the /public folder to the /assets URL path

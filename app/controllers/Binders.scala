@@ -33,7 +33,7 @@ class Binders extends Controller {
     val pThruT = thruTnotP.foldRight(List[(String,String)]())((a,b) =>
       (a.username, a.name) :: b).distinct
 
-    val bTags = binderTags.map(Tag(_, username, ""))
+    val bTags = binderTags.map(Tag(_, username,username, "")) //TODO: should the second field, the key, be the username?
 
     //current implementation counts the fact that a tag are associated with a binder as +1
     //for the user

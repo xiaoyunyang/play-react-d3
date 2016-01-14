@@ -1,7 +1,6 @@
 package models
 
 case class Binder(name: String, alias: String, description: String, username: String, tags: List[String])
-//European Article Number (EAN) identifier is an international article number
 
 //Data access object
 object Binder {

@@ -1,0 +1,150 @@
+@()(implicit flash: Flash, messages: Messages)
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.fullPath("react", "react.js"))'></script>
+        <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("marked.js"))'></script>
+        <script type="text/javascript" src="@routes.Assets.versioned("javascripts/react-with-addons.min.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.versioned("javascripts/jquery-2.1.1.min.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.versioned("javascripts/underscore-min.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.versioned("javascripts/d3.v3.min.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.versioned("assets/js/materialize.min.js")"></script>
+        <link rel='stylesheet' type='text/css' href="@routes.Assets.versioned("assets/css/style.css")">
+        <link rel='stylesheet' type='text/css' href="@routes.Assets.versioned("assets/css/main.css")">
+        <link rel='stylesheet' type='text/css' href="@routes.Assets.versioned("assets/css/icon/icon.css")">
+    </head>
+    <body class="index">
+
+        <div id="page-wrapper">
+            <header id="header" style="position: absolute;" class="alt"><!---Header-->
+                <h1 id="logo"><a href="index.html">LooseLeaf</a></h1>
+                <nav id="nav">
+                    <ul>
+                        <li><a href="index.html">Product</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li class="current"><a href="demo.html">Demo</a></li>
+                    </ul>
+                </nav>
+            </header><!---./Header-->
+            <section id="banner">
+                <div class="inner">
+                    <p>LooseLeaf React App</p>
+                </div>
+            </section>
+            <article id="main">
+                <div id="content"><!-- rendered by react --></div>
+            </article>
+        </div>
+        <!--====================== Document Setup ======================================-->
+        <script>
+            //modal stuff and jQuery
+            $(document).ready(function(){
+                $('.modal-trigger').leanModal();
+            });
+            function jsUpdateSize(){
+                //d3.selectAll("#navButton").remove();
+                d3.selectAll("#navButton").attr("style", "position: absolute");
+                render();
+            }
+            function jsLoadTemplate() {
+                d3.selectAll("#navButton").attr("style", "position: absolute");
+            }
+            window.onresize = jsUpdateSize;
+            window.onload = jsLoadTemplate;
+        </script>
+            <!---================= d3 stuff =================-->
+        <script type="text/javascript">
+                //all my global variables
+                var body;
+                var disp;
+                var dispMat;
+                var maxValue;
+                var dataset;
+                var matrix; //visualize dataset as a table/matrix
+
+                //svg element properties
+                var w;
+                var h;
+                var padding;
+                var barPadding;
+
+                var xScale;
+                //var xLabel;
+                var yScale;
+                var xAxis;
+                var yAxis;
+
+                var svg; //this exist inside of plotArea
+                var bars; //selection of all rect
+                var labels; //the number label on each bar
+
+                var selectedTag;
+
+                //initial declaration
+                body = d3.select("body");
+                maxValue = 10; //max # of the dataset value
+
+                /***************************************
+                 /** my anonymous functions for databinding
+                 /*****************************************/
+                //Define anonymous function, to be used when binding data
+                var value = function(d) {
+                    return d.value;
+                };
+                var key = function(d) {
+                    return d.key;
+                };
+                var tag = function(d) {
+                    return d.tag;
+                };
+                /*
+                 function loadTagFilter() {
+                 var dataset;
+                 personPathMap = ["student", "data/TagFilter/student.json"];
+
+                 d3.json("data/TagFilter/student.json", function(error, json) {
+                 if(error) return console.warn(error);
+
+                 //Hand JSON data off to global var,
+                 //so it's accessible later.
+                 dataset = json;    //Once loaded, copy to foodData global variable.
+
+                 });
+                 return dataset;
+                 };
+                 */
+                /***************************************
+                 /** Helper Functions
+                 /*****************************************/
+                //takes set of objects in dataset, and create 2D arrays out of them
+                function createMatrix(dataset) {
+                    var matrixTopRow = [];
+                    var matrixKey = [];
+                    var matrixVal = [];
+                    for(var i=0; i<dataset.length; i++) {
+                        matrixTopRow.push(dataset[i].tag);
+                        matrixKey.push(dataset[i].key);
+                        matrixVal.push(dataset[i].value);
+                    }
+                    var matrix = [matrixTopRow, matrixKey, matrixVal];
+                    return matrix;
+                }
+
+                //Define sort order flag
+                var sortOrder = false;
+
+        </script>
+
+
+        <script type='text/javascript' src='@routes.Assets.versioned("javascripts/myBookmarks.js")'></script>
+        <script type='text/javascript' src='@routes.Assets.versioned("assets/js/jquery.dropotron.min.js")'></script>
+        <script type='text/javascript' src='@routes.Assets.versioned("assets/js/jquery.scrolly.min.js")'></script>
+        <script type='text/javascript' src='@routes.Assets.versioned("assets/js/jquery.scrollgress.min.js")'></script>
+        <script type='text/javascript' src='@routes.Assets.versioned("assets/js/skel.min.js")'></script>
+        <script type='text/javascript' src='@routes.Assets.versioned("assets/js/util.js")'></script>
+        <script type="text/javascript" src="@routes.Assets.versioned("assets/js/main.js")"></script>
+
+    </body>
+
+
+</html>

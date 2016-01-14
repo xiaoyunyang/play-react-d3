@@ -30,7 +30,7 @@ class Tags extends Controller {
     val binderTags = for {
       binder <- binders
       tag <- binder.tags
-    } yield(Tag(tag, binder.alias, "binders/"+binder.name)) // <--this bindername needs to be changed to binder url eventually
+    } yield(Tag(tag, binder.username, binder.alias, "binders/"+binder.name)) //TODO: this binder.name needs to be changed to binder url eventually
 
     val tags = mapList(bookmarkTags ::: binderTags)(_.name)
     Ok(views.html.tags.list(tags.toList))
@@ -44,7 +44,7 @@ class Tags extends Controller {
     val binderTags = for {
       binder <- binders
       tag <- binder.tags
-    } yield(Tag(tag, binder.alias, binder.name))
+    } yield(Tag(tag, binder.username, binder.alias, binder.name)) //TODO: The second field, the key, should be SHA1(username+binder.name)
 
     val tags = bookmarkTags ::: binderTags.filter(_.name == tagName)
     Ok(views.html.tags.details(tagName, tags))
