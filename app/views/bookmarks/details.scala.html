@@ -1,17 +1,17 @@
 @(bookmark: Bookmark)(implicit flash: Flash, messages: Messages)
 
-@main(Messages("bookmarks.details", bookmark.name)) {
+@main(Messages("bookmarks.details", bookmark.title)) {
     <h2>
-        @Messages("bookmarks.details", bookmark.name)
+        @Messages("bookmarks.details", bookmark.title)
     </h2>
     <dl class="dl-horizontal">
         <dt>@Messages("bookmarks.url"):</dt>
         <dd><a target="_blank" href="@bookmark.url">@bookmark.url</a></dd>
-        <dd>@bookmark.name</dd>
+        <dd>@bookmark.title</dd>
         <dt>@Messages("bookmarks.description"):</dt>
         <dd>
             <ul>
-                <li>@bookmark.desc</li>
+                <li>@bookmark.title</li>
 
 
             </ul>

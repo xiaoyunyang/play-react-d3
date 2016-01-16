@@ -1,8 +1,6 @@
 package controllers
 
 //required by default
-import play.api._
-import play.api.mvc._
 import play.api.mvc.{Flash, Action, Controller}
 
 //required for implicit to work
@@ -16,8 +14,10 @@ import play.api.i18n.Messages
 
 //models
 import models.Product
-//required for json
+
+//required for json serialization and deserialization
 import play.api.libs.json._
+import play.api.libs.functional.syntax._
 
 class Products extends Controller {
   /*
@@ -32,13 +32,24 @@ class Products extends Controller {
     )(Product.apply)(Product.unapply)
   )
 
-  implicit object ProductWrites extends Writes[Product] {
-    def writes(p: Product) = Json.obj(
-      "ean" -> Json.toJson(p.ean),
-      "name" -> Json.toJson(p.name),
-      "description" -> Json.toJson(p.description)
-    )
-  }
+  // JSON serialization definition
+  implicit val productWrites: Writes[Product] = (
+    (JsPath \ "ean").write[Long] and
+    (JsPath \ "name").write[String] and
+    (JsPath \ "description").write[String]
+  )(unlift(Product.unapply))
+
+  // JSON deserialization definition
+  /*
+   * deserializes JSON into a JsSuccess that wraps an object of type T or a
+   * JsError that gives you access to JSON parsing errors, following the pattern
+   * of Scala’s Either[Error, T].
+   */
+  implicit val productReads: Reads[Product] = (
+    (JsPath \ "ean").read[Long] and
+    (JsPath \ "name").read[String] and
+    (JsPath \ "description").read[String]
+  )(Product.apply _)
 
   /***********************************************
    * The list Action: retrieves a list of all items
@@ -109,6 +120,18 @@ class Products extends Controller {
           .flashing("success" -> message)
       }
     )
+  }
+  def saveJson(ean: Long) = Action(parse.json) { request =>
+    val productJson = request.body
+    val product = productJson.as[Product] //parse the JSON into a models.Product instance
+    try {
+      Product.save(product)
+      Ok("Saved")
+    }
+    catch {
+      case e:IllegalArgumentException =>
+        BadRequest("Product not found")
+    }
   }
 
 }
