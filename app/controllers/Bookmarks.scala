@@ -23,7 +23,7 @@ class Bookmarks extends Controller {
    * Format is combined JSON serializer (Writes) and deserializer (Reads)
    */
   implicit val bookmarkFormat = (
-    (JsPath \ "key").format[String] and
+    (JsPath \ "key").format[Int] and
     (JsPath \ "url").format[String] and
     (JsPath \ "username").format[String] and
     (JsPath \ "title").format[String] and
@@ -71,7 +71,7 @@ class Bookmarks extends Controller {
       linkToTags.map { a =>
         val tags = a._2.map(a => a.name)
         Json.obj(
-          "key" -> JsString(a._1),
+          "key" -> JsNumber(a._1),
           "tags" -> tags //name is really the key
         )
       }
@@ -106,13 +106,13 @@ class Bookmarks extends Controller {
     }.getOrElse(NotFound)  //or return a 404 page
   }
 
-  def detailsJson(key: String) = Action {
+  def detailsJson(key: Int) = Action {
     Bookmark.findByKey(key).map { bookmark =>
       Ok(Json.toJson(bookmark))
     }.getOrElse(NotFound)
   }
 
-  def saveJson(key: String) = Action(parse.json) { request =>
+  def saveJson(key: Int) = Action(parse.json) { request =>
     val bookmarkJson = request.body
     val bookmark = bookmarkJson.as[Bookmark] //parse the JSON into a models.Bookmark instance
     try {

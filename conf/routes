@@ -28,8 +28,8 @@ GET     /bookmarks/:title           controllers.Bookmarks.details(title: String)
 # Bookmarks SPA sends JSON over to the client; JavaScript rendering
 GET     /spa                            controllers.Application.bookmarkSPA
 GET     /spa/bookmarks                  controllers.Bookmarks.listJson
-GET     /spa/bookmarks/details/:key     controllers.Bookmarks.detailsJson(key: String)
-PUT     /spa/bookmarks/details/:key     controllers.Bookmarks.saveJson(key: String)
+GET     /spa/bookmarks/details/:key     controllers.Bookmarks.detailsJson(key: Int)
+PUT     /spa/bookmarks/details/:key     controllers.Bookmarks.saveJson(key: Int)
 
 # Test React comment app
 GET     /react/test                 controllers.Application.react

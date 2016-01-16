@@ -374,7 +374,6 @@ var BookmarkList = React.createClass({
     },
     render: function() {
         return (
-
             <div className="filter-list">
                 <span className="center">
                     <p>ChartMenu options:
@@ -433,6 +432,7 @@ var BookmarkList = React.createClass({
 var List = React.createClass({
     render: function() {
         var itemTags = this.props.itemToTags;
+
         return (
             <ul className="collection"> {
                 this.props.items.map(function(item) {

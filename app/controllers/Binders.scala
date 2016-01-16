@@ -1,8 +1,6 @@
 package controllers
 
-import play.api._
-import play.api.mvc._
-
+import scala.util.hashing.MurmurHash3._
 import play.api.mvc.{Action, Controller}
 import scala.concurrent.{ExecutionContext, Future}
 import models.{Tag, Binder, User}
@@ -33,7 +31,7 @@ class Binders extends Controller {
     val pThruT = thruTnotP.foldRight(List[(String,String)]())((a,b) =>
       (a.username, a.name) :: b).distinct
 
-    val bTags = binderTags.map(Tag(_, username,username, "")) //TODO: should the second field, the key, be the username?
+    val bTags = binderTags.map(Tag(_, stringHash(username),username, "")) //TODO: should the second field, the key, be the username?
 
     //current implementation counts the fact that a tag are associated with a binder as +1
     //for the user
