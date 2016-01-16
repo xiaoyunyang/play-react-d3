@@ -1,6 +1,7 @@
 package models
 import play.api.libs._
-case class Bookmark(key: String, url: String, username: String, title: String,  description: Option[String], favicon: String)
+import scala.util.hashing.MurmurHash3._
+case class Bookmark(key: Int, url: String, username: String, title: String,  description: Option[String], favicon: String)
 //SHA1 of url+username is the key, i.e., unique identifier
 
 //Data access object
@@ -16,13 +17,13 @@ object Bookmark {
     Bookmark("https://angel.co/", "AngelList",
       "Find a great startup job, invest in a startup or raise money."),
 */
-    Bookmark("e8b1c2e18703ae5d71620cd5990d450224ce2e3e", "https://www.khanacademy.org/", "afenner",
+    Bookmark(stringHash("https://www.khanacademy.org/"+"afenner"), "https://www.khanacademy.org/", "afenner",
       "Khan Academy",Some("Free Online education."), "https://stagr.in/img/placeholder.png"),
-    Bookmark("eafdcb58ca4b93fa257df6ca49ed80a04fe9639e", "https://www.khanacademy.org/", "xyang",
-      "Khan Academy",Some("online learning platform."), "xyang"),
-    Bookmark("5b3373b5c05872decd62434703a91e3765a66f25", "http://www.number-shapes.com/", "afenner",
+    Bookmark(stringHash("https://www.khanacademy.org/"+"xyang"), "https://www.khanacademy.org/", "xyang",
+      "Khan Academy",Some("online learning platform."), "https://stagr.in/img/placeholder.png"),
+    Bookmark(stringHash("http://www.number-shapes.com/"+"afenner"), "http://www.number-shapes.com/", "afenner",
       "NumberShapes", Some("Tablet early math education using symbols and hand gestures."), "https://stagr.in/img/placeholder.png"),
-    Bookmark("a00106373eaaac94abe9829d55652f9541af8f87", "http://theeqns.com/", "xyang",
+    Bookmark(stringHash("http://theeqns.com/"+"xyang"), "http://theeqns.com/", "xyang",
       "EQNS", Some("equations for high school and college sciences."), "https://stagr.in/img/placeholder.png")
 
   )
@@ -30,7 +31,7 @@ object Bookmark {
   def findByUrl(url: String) = bookmarks.find(_.url == url)
   def findByTitle(title: String) = bookmarks.find(_.title == title)
 
-  def findByKey(key: String) = bookmarks.find(_.key == key)
+  def findByKey(key: Int) = bookmarks.find(_.key == key)
 
   def findByUserName(username: String) = bookmarks.filter(_.username == username).toList
 

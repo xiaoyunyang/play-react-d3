@@ -12,7 +12,7 @@ jQuery ($) ->
         loadBookmarkDetails row
 
   bookmarkDetailsUrl = (bookmarkKey) ->
-    $table.data('details').replace "Nil", bookmarkKey
+    $table.data('details').replace '0', bookmarkKey
 
   loadBookmarkDetails = (tableRow) ->
     bookmarkKey = tableRow.text()
