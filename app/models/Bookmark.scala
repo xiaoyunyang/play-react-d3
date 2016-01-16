@@ -1,6 +1,6 @@
 package models
 import play.api.libs._
-case class Bookmark(key: String, url: String, name: String, desc: String, username: String)
+case class Bookmark(key: String, url: String, username: String, title: String,  description: Option[String], favicon: String)
 //SHA1 of url+username is the key, i.e., unique identifier
 
 //Data access object
@@ -16,17 +16,19 @@ object Bookmark {
     Bookmark("https://angel.co/", "AngelList",
       "Find a great startup job, invest in a startup or raise money."),
 */
-    Bookmark("e8b1c2e18703ae5d71620cd5990d450224ce2e3e", "https://www.khanacademy.org/", "Khan Academy","Free Online education.", "afenner"),
-    Bookmark("eafdcb58ca4b93fa257df6ca49ed80a04fe9639e", "https://www.khanacademy.org/", "Khan Academy","online learning platform.", "xyang"),
-
-    Bookmark("5b3373b5c05872decd62434703a91e3765a66f25", "http://www.number-shapes.com/", "NumberShapes",
-      "Tablet early math education using symbols and hand gestures.", "afenner"),
-    Bookmark("a00106373eaaac94abe9829d55652f9541af8f87", "http://theeqns.com/", "EQNS", "equations for high school and college sciences.", "xyang")
+    Bookmark("e8b1c2e18703ae5d71620cd5990d450224ce2e3e", "https://www.khanacademy.org/", "afenner",
+      "Khan Academy",Some("Free Online education."), "https://stagr.in/img/placeholder.png"),
+    Bookmark("eafdcb58ca4b93fa257df6ca49ed80a04fe9639e", "https://www.khanacademy.org/", "xyang",
+      "Khan Academy",Some("online learning platform."), "xyang"),
+    Bookmark("5b3373b5c05872decd62434703a91e3765a66f25", "http://www.number-shapes.com/", "afenner",
+      "NumberShapes", Some("Tablet early math education using symbols and hand gestures."), "https://stagr.in/img/placeholder.png"),
+    Bookmark("a00106373eaaac94abe9829d55652f9541af8f87", "http://theeqns.com/", "xyang",
+      "EQNS", Some("equations for high school and college sciences."), "https://stagr.in/img/placeholder.png")
 
   )
   def findAll = bookmarks.toList.sortBy(_.url)
   def findByUrl(url: String) = bookmarks.find(_.url == url)
-  def findByName(name: String) = bookmarks.find(_.name == name)
+  def findByTitle(title: String) = bookmarks.find(_.title == title)
 
   def findByKey(key: String) = bookmarks.find(_.key == key)
 
@@ -35,5 +37,12 @@ object Bookmark {
   //add a new bookmark to the bookmarks set
   def add(bookmark: Bookmark): Unit = {
     bookmarks = bookmarks + bookmark //persistent storage
+  }
+  def save(bookmark: Bookmark) = {
+    findByKey(bookmark.key).map( oldBookmark =>
+      this.bookmarks = this.bookmarks - oldBookmark + bookmark
+    ).getOrElse(
+      throw new IllegalArgumentException("Bookmark not found")
+    )
   }
 }

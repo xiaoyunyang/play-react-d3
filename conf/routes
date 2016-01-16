@@ -14,6 +14,8 @@ GET     /products/new               controllers.Products.newProduct
 GET     /products/spa               controllers.Application.productSPA
 GET     /products/spa/data          controllers.Products.listJson
 GET     /products/spa/details/:ean  controllers.Products.detailsJson(ean: Long)
+PUT     /products/spa/details/:ean  controllers.Products.saveJson(ean: Long)
+
 
 GET     /products/:ean              controllers.Products.details(ean: Long)
 GET     /barcode/:ean               controllers.Barcode.barcode(ean: Long)
@@ -21,14 +23,13 @@ GET     /barcode/:ean               controllers.Barcode.barcode(ean: Long)
 
 # Bookmarks
 GET     /bookmarks                  controllers.Bookmarks.list
-GET     /bookmarks/:name            controllers.Bookmarks.details(name: String)
-
+GET     /bookmarks/:title           controllers.Bookmarks.details(title: String)
 
 # Bookmarks SPA sends JSON over to the client; JavaScript rendering
 GET     /spa                            controllers.Application.bookmarkSPA
 GET     /spa/bookmarks                  controllers.Bookmarks.listJson
 GET     /spa/bookmarks/details/:key     controllers.Bookmarks.detailsJson(key: String)
-
+PUT     /spa/bookmarks/details/:key     controllers.Bookmarks.saveJson(key: String)
 
 # Test React comment app
 GET     /react/test                 controllers.Application.react

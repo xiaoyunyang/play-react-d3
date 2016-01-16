@@ -16,8 +16,8 @@
                 @for(detail <- bookmark._2) {
                     <li>collected by <a href="@controllers.routes.Binders.list(detail.username)">@detail.username</a>:
                         <ul>
-                            <li>name => @detail.name</li>
-                            <li>desc => @detail.desc</li>
+                            <li>name => @detail.title</li>
+                            <li>desc => @detail.description</li>
                         </ul>
                     </li>
                 }
