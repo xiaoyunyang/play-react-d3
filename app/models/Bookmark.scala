@@ -2,7 +2,7 @@ package models
 import play.api.libs._
 import scala.util.hashing.MurmurHash3._
 case class Bookmark(key: Int, url: String, username: String, title: String,  description: Option[String], favicon: String)
-//SHA1 of url+username is the key, i.e., unique identifier
+//MurmurHash.stringHash of url+username is the key, i.e., unique identifier
 
 //Data access object
 object Bookmark {

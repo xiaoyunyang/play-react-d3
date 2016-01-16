@@ -1,4 +1,4 @@
-@(username: String, binder: Binder)(implicit flash: Flash, messages: Messages)
+@(username: String, binder: Binder, myBookmarks: List[(Bookmark, Tag)], recBookmarks: List[(Bookmark, Tag)])(implicit flash: Flash, messages: Messages)
 
 @main(Messages("binders.details", binder.alias)) {
     <h2>
@@ -11,6 +11,30 @@
 
         @for(t <- binder.tags) {
             <dd><a href="@t">#@t</a></dd>
+        }
+        <dt>Your Bookmarks:</dt>
+        @for(b <- myBookmarks) {
+            <dd>
+                <ul>
+                    <li><a target="_blank" href="@b._1.url">@b._1.title</a></li>
+                    <li><a href="@controllers.routes.Binders.list(b._1.username)">@b._1.username</a></li>
+                    <li>@b._1.description</li>
+                    <li><a href="@controllers.routes.Tags.details(b._2.name)">#@b._2.name</a></li>
+                </ul>
+            </dd>
+        }
+        <dt>Recommended Bookmarks:</dt>
+        @for(b <- recBookmarks) {
+            <dd>
+                <ul>
+                    <li><a target="_blank" href="@b._1.url">@b._1.title</a></li>
+                    <li><a href="@controllers.routes.Binders.list(b._1.username)">@b._1.username</a></li>
+                    <li>@b._1.description</li>
+                    <li><a href="@controllers.routes.Tags.details(b._2.name)">#@b._2.name</a></li>
+                </ul>
+            </dd>
+
+
         }
     </dl>
     <a class="btn btn-danger" href="@controllers.routes.Binders.delete(username,binder.name)">Delete</a>
