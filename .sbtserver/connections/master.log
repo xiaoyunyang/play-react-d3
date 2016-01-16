@@ -1,7 +1,52 @@
-New log file opened at Fri Jan 15 21:59:54 EST 2016 by 17438@Xiaoyuns-MacBook-Pro.local
-Taking next connection to: 61553
-New client attempting to connect on port: 61554-61553
-  Address = /192.168.0.102:61553
-This client on port 61554 has uuid 1bf198bd-6a53-48dd-b15c-f3686e691c2a configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: play-fork-run-1bf198bd-6a53-48dd-b15c-f3686e691c2a
-Taking next connection to: 61553
+New log file opened at Sat Jan 16 11:48:27 EST 2016 by 2976@Xiaoyuns-MacBook-Pro.local
+Taking next connection to: 51744
+New client attempting to connect on port: 51745-51744
+  Address = /172.20.10.2:51744
+This client on port 51745 has uuid 4068e719-8757-4aae-8675-4b5da4a9a793 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: play-fork-run-4068e719-8757-4aae-8675-4b5da4a9a793
+Taking next connection to: 51744
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 51744
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 51744
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 51744
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 51744
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 51744
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 51744
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 51744
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 51744
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 51744
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 51744
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 51744
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 51744
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 51744
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 51744
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 51744

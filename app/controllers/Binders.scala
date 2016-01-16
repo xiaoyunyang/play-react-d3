@@ -3,7 +3,7 @@ package controllers
 import scala.util.hashing.MurmurHash3._
 import play.api.mvc.{Action, Controller}
 import scala.concurrent.{ExecutionContext, Future}
-import models.{Tag, Binder, User}
+import models.{Bookmark, Tag, Binder, User}
 
 import TagHelper._
 
@@ -44,8 +44,24 @@ class Binders extends Controller {
   }
 
   def details(username: String, name: String) = Action { implicit request =>
+    /* recommend Bookmarks */
+    val allTags = Tag.findAll //all tags associated with bookmarks
+    val myTags = Tag.findByUsername(username) //tags associated with user's bookmarks
+
     Binder.findByName(name).map { binder =>
-      Ok(views.html.binders.details(username, binder))
+      val binderTags = binder.tags //tags associated with binders
+/*
+      val thruT = (myTags.map(_.name) ::: binderTags)
+        .flatMap(a => allTags.filter(_.name == a)).distinct
+*/
+      val thruT = binderTags.flatMap(a => allTags.filter(_.name == a)).distinct
+      val (thruTP,thruTnotP) =thruT.partition(a => a.username == username)
+
+      val myBookmarks = thruTP.map(a => Bookmark.findByKey(a.key).get).zip(thruTP)
+      val recBookmarks = thruTnotP.map(a => Bookmark.findByKey(a.key).get).zip(thruTnotP)
+
+
+      Ok(views.html.binders.details(username, binder, myBookmarks, recBookmarks))
     }.getOrElse(NotFound)  //or return a 404 page
   }
 
