@@ -19,6 +19,8 @@ jQuery ($) ->
     $.get productDetailsUrl(eanCode), (product) ->
       tableRow.append $('<td/>').text(product.name)
       tableRow.append $('<td/>').text(product.description)
+      tableRow.append $('<td/>').text(product.pieces)
+      tableRow.append $('<td/>').text(product.active)
       tableRow.append $('<td/>')
 
   loadProductTable()
@@ -29,6 +31,8 @@ jQuery ($) ->
       ean: parseInt(ean)
       name: name
       description: description
+      pieces: pieces
+      active: active
     jqxhr = $.ajax
       type: "PUT"
       url: productDetailsUrl(parseInt(ean))

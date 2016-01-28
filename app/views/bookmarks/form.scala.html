@@ -1,0 +1,66 @@
+@import views.html.helper.FieldConstructor
+
+@(form: Form[Bookmark], username: String)(implicit flash: Flash, messages: Messages)
+@implicitField = @{FieldConstructor(myFieldConstructor.f)}
+
+@main("Create New Bookmark") {
+    @helper.form(action = routes.Bookmarks.create(username), 'class->"col s12") {
+        <div class="col s12 m8 l8">
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">link</i>
+                    @helper.inputText(form("url"), 'class->"validate")
+                    <label for="url">URL</label>
+                </div>
+            </div>
+
+            <input type="hidden" id="username" name="username" value="@username" />
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">mode_edit</i>
+                    @helper.textarea(form("description"), 'class->"materialize-textarea")
+                    <label for="description">Description</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    @helper.inputText(form("title"), 'class->"validate")
+                    <label for="title">Title</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    @helper.inputText(form("favicon"), 'class->"validate")
+                    <label for="favicon">Favicon</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select multiple>
+                        <option value="" disabled selected>Choose your tags</option>
+                        <option value="1">Tag1</option>
+                        <option value="2">Tag2</option>
+                        <option value="3">Tag3</option>
+                    </select>
+                    <label>Select Tags</label>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn waves-effect waves-light">
+                    Create Bookmark
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </div>
+
+    }
+}
+<script type='text/javascript'>
+
+    $(document).ready(function () {
+        $('select').material_select(); //for the drop-down menu selector
+    });
+
+
+</script>

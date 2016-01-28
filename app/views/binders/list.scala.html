@@ -1,38 +1,76 @@
 @(user: User, binders: List[Binder], myTags: List[(String,Int)], pThruT: List[(String,String)])(implicit flash: Flash, messages: Messages)
-@main(Messages("application.name")) {
-    <h2>
-        @user.name
-    </h2>
-    <h3>Binders:</h3>
-    <dl class="products">
-    @for(binder <- binders) {
-        <dt>
-            <a href="@controllers.routes.Binders.details(user.username, binder.name)">
-                @binder.alias
-            </a>
-        </dt>
-        <dd>@binder.description</dd>
-    }
-    </dl>
+@main(user.name) {
+    <div class="side-nav fixed">
+        <ul id="slide-out" class="collection with-header">
+            <li class="collection-header">@user.name</li>
+        </ul>
 
-    <h3>All @user.name's Tags:</h3>
-    <ul>
-        @for(t <- myTags) {
+        <ul id="slide-out" class="collapsible" data-collapsible="expandable">
             <li>
-                <a href="@controllers.routes.Tags.detailsUser(user.username, t._1)">#@t._1</a> (@t._2)
+                <div class="collapsible-header active">Binders</div>
+                <div class="collapsible-body">
+                    <ul class="collection with-header valign">
+                        @for(binder <- binders) {
+                            <li class="collection-item">
+                                <a href="@controllers.routes.Binders.details(user.username, binder.name)">
+                                    @binder.alias
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
             </li>
-        }
-    </ul>
-    <a href="@controllers.routes.Tags.listByUser(user.username)">All @user.name's Tags</a>
+            <li>
+                <div class="collapsible-header">Tags</div>
+                <div class="collapsible-body">
+                    <ul class="collection with-header valign">
+                        @for(t <- myTags) {
+                            <li class="collection-item">
+                                <a href="@controllers.routes.Tags.details(t._1)">
+                                    #@t._1 (@t._2)</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </li>
 
-    <h3>Bookmarks:</h3>
-    <a href="@controllers.routes.Bookmarks.listByUser(user.username)">All @user.name's Bookmarks</a>
-    <h3>Recommended Friend Based on Shared Tags:</h3>
-    <ul>
+            <li class="no-padding">
+        </ul>
+    </div>
+
+
+    <div class="col s12 m8 l8">
+
+        <ul class="collection with-header ll-listing">
+            <li class="collection-header"><h4>Binders</h4></li>
+            @for(binder <- binders) {
+                <li class="collection-item">
+                    <a href="@controllers.routes.Binders.details(user.username, binder.name)">@binder.alias</a>
+                    <p>@binder.description</p>
+                </li>
+            }
+
+        </ul>
+
+        <h5>Bookmarks</h5>
+        <a class="btn" href="@controllers.routes.Bookmarks.createForm(user.username)">Create New Bookmark</a>
+        <a class="btn" href="@controllers.routes.Bookmarks.listByUser(user.username)">All @user.name's Bookmarks</a>
+    </div>
+    <div class="col s12 m8 l3">
+        <h5>Similar Curators</h5>
+        <ul id="slide-out" class="collapsible" data-collapsible="expandable">
         @for(f <- pThruT) {
-            <li><a href="@controllers.routes.Binders.list(f._1)">@f._1</a> because
-                <a href="@controllers.routes.Tags.details(f._2)">#@f._2</a>
+            <li>
+                <div class="collapsible-header">
+                    <a href="@controllers.routes.Binders.list(f._1)">@f._1</a> <i class="material-icons right">keyboard_arrow_down</i>
+                </div>
+                <div class="collapsible-body">
+                    <p>Because you both collected <a href="@controllers.routes.Tags.details(f._2)">#@f._2</a></p>
+                </div>
             </li>
         }
-    </ul>
+        </ul>
+    </div>
+
+
 }

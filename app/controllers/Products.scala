@@ -9,7 +9,7 @@ import play.api.i18n.Messages.Implicits._
 
 //required for Forms
 import play.api.data.Form
-import play.api.data.Forms.{mapping, longNumber, nonEmptyText}
+import play.api.data.Forms._
 import play.api.i18n.Messages
 
 //models
@@ -28,7 +28,9 @@ class Products extends Controller {
       "ean" -> longNumber.verifying(
         "validation.ean.duplicate", Product.findByEan(_).isEmpty),
       "name" -> nonEmptyText,
-      "description" -> nonEmptyText
+      "description" -> nonEmptyText,
+      "pieces" -> number,
+      "active" -> boolean
     )(Product.apply)(Product.unapply)
   )
 
@@ -36,7 +38,9 @@ class Products extends Controller {
   implicit val productWrites: Writes[Product] = (
     (JsPath \ "ean").write[Long] and
     (JsPath \ "name").write[String] and
-    (JsPath \ "description").write[String]
+    (JsPath \ "description").write[String] and
+    (JsPath \ "pieces").write[Int] and
+    (JsPath \ "active").write[Boolean]
   )(unlift(Product.unapply))
 
   // JSON deserialization definition
@@ -48,7 +52,9 @@ class Products extends Controller {
   implicit val productReads: Reads[Product] = (
     (JsPath \ "ean").read[Long] and
     (JsPath \ "name").read[String] and
-    (JsPath \ "description").read[String]
+    (JsPath \ "description").read[String] and
+    (JsPath \ "pieces").read[Int] and
+    (JsPath \ "active").read[Boolean]
   )(Product.apply _)
 
   /***********************************************
@@ -101,15 +107,23 @@ class Products extends Controller {
     Ok(views.html.products.editProduct(form))
   }
 
-  /***********************************************
-   * Save the form for create new item
-   ***********************************************/
+  def createForm() = Action { implicit request =>
+    Ok(views.html.products.form(productForm))
+  }
+
+  def create() = Action { implicit request =>
+    productForm.bindFromRequest.fold(
+      formWithErrors => Ok(views.html.products.form(formWithErrors)),
+      value => Ok("created:" + value)
+    )
+  }
+
   def save = Action { implicit request =>
     val newProductForm = productForm.bindFromRequest()
 
     newProductForm.fold(
       hasErrors = { form =>
-        Redirect(routes.Products.newProduct())
+        Redirect(routes.Products.createForm())
           .flashing(Flash(form.data) +
             ("error" -> Messages("validation.errors")))
       },

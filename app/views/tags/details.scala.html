@@ -1,6 +1,7 @@
 @(tagName: String, tag: List[Tag])(implicit flash: Flash, messages: Messages)
 
 @main(Messages("tags.tagname", tagName)) {
+
     <h2>
         @Messages("tags.tagname", tagName)
     </h2>
@@ -8,7 +9,7 @@
         @for(detail <- tag) {
             <dt>@Messages("tags.username"):</dt>
             <dd>
-                <a target="_blank" href="@controllers.routes.Binders.list(detail.username)">
+                <a href="@controllers.routes.Binders.list(detail.username)">
                     @detail.username
                 </a>
             </dd>

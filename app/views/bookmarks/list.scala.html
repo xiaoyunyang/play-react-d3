@@ -1,13 +1,14 @@
-@(bookmarks: List[(String, List[Bookmark])],
-        tagToLinks: List[(String, List[Tag])],
-        linkToTags: List[(String, List[Tag])]
+@(username: String,
+      bookmarks: List[(String, List[Bookmark])],
+      tagToLinks: List[(String, List[Tag])],
+      linkToTags: List[(String, List[Tag])]
 )(implicit flash: Flash, messages: Messages)
 @main(Messages("application.name")) {
     <h2>Bookmarks</h2>
     <dl class="products">
     @for(bookmark <- bookmarks) {
         <dt>
-            <a href="@controllers.routes.Bookmarks.details(bookmark._1)">
+            <a target="_blank" href="@helper.urlEncode(bookmark._1)">
                 @bookmark._1
             </a>
         </dt>

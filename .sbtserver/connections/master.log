@@ -1,52 +1,7 @@
-New log file opened at Sat Jan 16 11:48:27 EST 2016 by 2976@Xiaoyuns-MacBook-Pro.local
-Taking next connection to: 51744
-New client attempting to connect on port: 51745-51744
-  Address = /172.20.10.2:51744
-This client on port 51745 has uuid 4068e719-8757-4aae-8675-4b5da4a9a793 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: play-fork-run-4068e719-8757-4aae-8675-4b5da4a9a793
-Taking next connection to: 51744
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 51744
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 51744
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 51744
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 51744
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 51744
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 51744
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 51744
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 51744
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 51744
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 51744
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 51744
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 51744
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 51744
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 51744
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 51744
+New log file opened at Wed Jan 27 23:21:07 EST 2016 by 49584@Xiaoyuns-MacBook-Pro.local
+Taking next connection to: 54411
+New client attempting to connect on port: 54412-54411
+  Address = /10.1.10.162:54411
+This client on port 54412 has uuid f33d942b-dccd-4f73-8142-0ba578a5ce88 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: play-fork-run-f33d942b-dccd-4f73-8142-0ba578a5ce88
+Taking next connection to: 54411

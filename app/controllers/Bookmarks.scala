@@ -1,20 +1,29 @@
 package controllers
 
 import TagHelper._
-import play.api.mvc.{Action, Controller}
+
+import play.api.mvc.{Flash, Action, Controller}
 import scala.concurrent.{ExecutionContext, Future}
 
 //required for implicit to work
 import play.api.Play.current
 import play.api.i18n.Messages.Implicits._
 
+//required for Forms
+import play.api.data.Form
+import play.api.data.Forms._
+import play.api.i18n.Messages
+
 //models
 import models.{Bookmark, Tag}
+
 
 //required for json serialization and deserialization
 import play.api.libs.json._
 import play.api.libs.json.Reads._
 import play.api.libs.functional.syntax._ //combinator syntax
+
+import scala.util.hashing.MurmurHash3._
 
 class Bookmarks extends Controller {
 
@@ -32,16 +41,73 @@ class Bookmarks extends Controller {
   )(Bookmark.apply, unlift(Bookmark.unapply))
 
 
-  /*
-   * List Bookmarks
-   */
+  private val bookmarkForm  = Form(
+    mapping(
+      "url" -> nonEmptyText,
+      "username" -> nonEmptyText,
+      "title" -> nonEmptyText,
+      "description" -> optional(nonEmptyText),
+      "favicon" -> nonEmptyText
+    )
+    ((url, username, title, description, favicon) =>
+          Bookmark(stringHash(""+url+username), url, username, title, description, favicon))
+    ((bookmark: Bookmark) =>
+          Some(bookmark.url, bookmark.username, bookmark.title, bookmark.description, bookmark.favicon))
+  )
+
+  /*********************************************************************
+   * Create Actions:
+   * Create new Bookmarks
+   *********************************************************************/
+  def createForm(username: String) = Action { implicit request =>
+    Ok(views.html.bookmarks.form(bookmarkForm, username))
+  }
+
+  def create(username: String) = Action { implicit request =>
+    bookmarkForm.bindFromRequest.fold(
+      formWithErrors => {
+        Ok(views.html.bookmarks.form(formWithErrors, username))
+      },
+      newBookmark => {
+        Bookmark.add(newBookmark)
+        val message = Messages("products.new.success", newBookmark.title)
+        Redirect(routes.Bookmarks.details(username, newBookmark.title))
+          .flashing("success" -> message)
+      }
+    )
+  }
+  def save(username: String) = Action { implicit request =>
+    val newBookmarkForm = bookmarkForm.bindFromRequest()
+
+    newBookmarkForm.fold(
+      hasErrors = { form =>
+        Redirect(routes.Bookmarks.createForm(username))
+          .flashing(Flash(form.data) +
+            ("error" -> Messages("validation.errors")))
+      },
+      success = { newBookmark =>
+        Bookmark.add(newBookmark)
+        val message = Messages("products.new.success", newBookmark.title)
+        Redirect(routes.Bookmarks.details(username, newBookmark.title))
+          .flashing("success" -> message)
+      }
+    )
+  }
+
+
+  /*********************************************************************
+   * List Actions:
+   * List Bookmarks with filters and format spec
+   *********************************************************************/
+  // TODO: write pattern matching / polymorphic functions to generalize list functions
+
   def list = Action { implicit request =>
     val bookmarksList = Bookmark.findAll
     val bookmarks = mapList(bookmarksList)(_.url)
     val tags = Tag.findAll
     val tagToLinks = mapList(tags)(_.name)
     val linkToTags = mapList(tags)(_.url)
-    Ok(views.html.bookmarks.list(bookmarks.toList, tagToLinks.toList, linkToTags.toList))
+    Ok(views.html.bookmarks.list("public", bookmarks.toList, tagToLinks.toList, linkToTags.toList))
   }
 
   def listJson = Action { implicit request =>
@@ -91,16 +157,15 @@ class Bookmarks extends Controller {
     val tagToLinks = mapList(tags)(_.name)
     val linkToTags = mapList(tags)(_.url)
 
-    Ok(views.html.bookmarks.list(bookmarks.toList, tagToLinks.toList, linkToTags.toList))
+    Ok(views.html.bookmarks.list(username, bookmarks.toList, tagToLinks.toList, linkToTags.toList))
   }
 
   /*********************************************************************
-    * The details Action:
-    * retrieves details for a particular item
-    *********************************************************************/
-  // Future Expansion:
-  // retrieves recommendation for a particular item based on shared tags
-  def details(title: String) = Action { implicit request =>
+  * The details Action:
+  * retrieves details for a particular item
+  *********************************************************************/
+  // TODO: retrieves recommendation for a particular item based on shared tags
+  def details(username: String, title: String) = Action { implicit request =>
     Bookmark.findByTitle(title).map { bookmark =>
       Ok(views.html.bookmarks.details(bookmark))
     }.getOrElse(NotFound)  //or return a 404 page

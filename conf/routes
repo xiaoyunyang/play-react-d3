@@ -8,7 +8,10 @@ GET     /                           controllers.Application.index
 # Product List
 GET     /products                   controllers.Products.list
 POST    /products                   controllers.Products.save
+POST    /products                   controllers.Products.create
 GET     /products/new               controllers.Products.newProduct
+GET     /products/create            controllers.Products.createForm
+
 
 # Products SPA
 GET     /products/spa               controllers.Application.productSPA
@@ -23,7 +26,7 @@ GET     /barcode/:ean               controllers.Barcode.barcode(ean: Long)
 
 # Bookmarks
 GET     /bookmarks                  controllers.Bookmarks.list
-GET     /bookmarks/:title           controllers.Bookmarks.details(title: String)
+
 
 # Bookmarks SPA sends JSON over to the client; JavaScript rendering
 GET     /spa                            controllers.Application.bookmarkSPA
@@ -53,10 +56,10 @@ GET     /dashboard/:username/binders/:bindername           controllers.Binders.d
 GET     /dashboard/:username/binders/:bindername/delete    controllers.Binders.delete(username: String, bindername: String)
 GET     /dashboard/:username/tags                          controllers.Tags.listByUser(username: String)
 GET     /dashboard/:username/tags/:tagName                 controllers.Tags.detailsUser(username: String, tagName: String)
-
-GET     /dashboard/:username/bookmarks      controllers.Bookmarks.listByUser(username: String)
-
-
+GET     /dashboard/:username/bookmarks                     controllers.Bookmarks.listByUser(username: String)
+GET     /dashboard/:username/bookmarks/details/:title      controllers.Bookmarks.details(username: String, title: String)
+GET     /dashboard/:username/bookmarks/create              controllers.Bookmarks.createForm(username: String)
+POST    /dashboard/:username/bookmarks                     controllers.Bookmarks.create(username: String)
 
 # Async Jobs
 GET     /async                      controllers.PickLists.index

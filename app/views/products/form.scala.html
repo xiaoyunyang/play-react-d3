@@ -1,0 +1,48 @@
+@import views.html.helper.FieldConstructor
+@(productForm: Form[Product])(implicit flash: Flash, messages: Messages)
+@implicitField = @{FieldConstructor(myFieldConstructor.f)}
+
+@main("Product Form") {
+
+    @helper.form(action = routes.Products.create) {
+    <div class="col s12 m8 l8">
+        <div class="row">
+            <div class="input-field col s12">
+
+                <i class="material-icons prefix">link</i>
+                @helper.inputText(productForm("name"), 'class->"validate")
+                <label for="name">name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">mode_edit</i>
+                @helper.textarea(productForm("description"), 'class->"materialize-textarea")
+                <label for="description">Description</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">local_offer</i>
+                @helper.inputText(productForm("ean"))
+                <label for="ean">EAN</label>
+            </div>
+            <div class="input-field col s6">
+                @helper.inputText(productForm("pieces"), 'class->"validate")
+                <label for="pieces">Pieces</label>
+            </div>
+        </div>
+        <p>
+            <input id="active" type="checkbox" />
+            <label for="active">Active</label>
+        </p>
+        <div class="form-actions">
+            <button type="submit" class="btn waves-effect waves-light">
+                Create Product
+                <i class="material-icons right">send</i>
+            </button>
+        </div>
+    </div>
+    }
+
+}
